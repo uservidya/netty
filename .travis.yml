@@ -8,4 +8,4 @@ branches:
     - 3
     - 3.5
 before_install: 'mvn -version'
-install: 'mvn clean deploy -Pfull -DskipTests'
+install: 'mvn -U -B -e clean deploy -Pfull -DskipTests'
