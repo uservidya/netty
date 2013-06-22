@@ -259,8 +259,41 @@
     </dependency>
   </dependencies>
 
+  <pluginRepositories>
+      <pluginRepository>
+          <id>evgenyg.artifactoryonline.com</id>
+          <url>http://evgenyg.artifactoryonline.com/evgenyg/repo</url>
+          <snapshots><enabled>true</enabled></snapshots>
+          <releases><enabled>true</enabled></releases>
+      </pluginRepository>
+  </pluginRepositories>
+
   <build>
     <plugins>
+      <plugin>
+          <groupId>org.jfrog.buildinfo</groupId>
+          <artifactId>build-info-extractor-maven3-plugin</artifactId>
+          <version>2.2.x-SNAPSHOT</version>
+          <inherited>false</inherited>
+          <executions>
+              <execution>
+                  <id>build-info</id>
+                  <goals>
+                      <goal>extract-build-info</goal>
+                  </goals>
+                  <configuration>
+                      <writeMergedProperties>true</writeMergedProperties>
+                      <artifactoryPublishContextUrl>http://evgenyg.artifactoryonline.com/evgenyg</artifactoryPublishContextUrl>
+                      <artifactoryPublishUsername>temp-deployer</artifactoryPublishUsername>
+                      <artifactoryPublishPassword>{DESede}xtnt3nnvIKDvPdrT+lZJmUuA3LJ4WBNW</artifactoryPublishPassword>
+                      <artifactoryResolutionRepoKey>repo</artifactoryResolutionRepoKey>
+                      <artifactoryPublishRepoKey>temp</artifactoryPublishRepoKey>
+                      <artifactoryPublishSnapshotRepoKey>temp</artifactoryPublishSnapshotRepoKey>
+                      <buildInfoConfigIncludeEnvVars>true</buildInfoConfigIncludeEnvVars>
+                  </configuration>
+              </execution>
+          </executions>
+      </plugin>
       <plugin>
         <artifactId>maven-enforcer-plugin</artifactId>
         <version>1.2</version>
