@@ -282,14 +282,28 @@
                       <goal>extract-build-info</goal>
                   </goals>
                   <configuration>
-                      <writeProperties>true</writeProperties>
-                      <artifactoryPublishContextUrl>http://evgenyg.artifactoryonline.com/evgenyg</artifactoryPublishContextUrl>
-                      <artifactoryPublishUsername>temp-deployer</artifactoryPublishUsername>
-                      <artifactoryPublishPassword>{DESede}YiN0PzdSPYltV2J3u3O0fq3y2CbrEWxa</artifactoryPublishPassword>
-                      <artifactoryResolutionRepoKey>repo</artifactoryResolutionRepoKey>
-                      <artifactoryPublishRepoKey>temp</artifactoryPublishRepoKey>
-                      <artifactoryPublishSnapshotRepoKey>temp</artifactoryPublishSnapshotRepoKey>
-                      <buildInfoConfigIncludeEnvVars>true</buildInfoConfigIncludeEnvVars>
+                    <artifactory>
+                        <activateRecorder>true</activateRecorder>
+                        <timeout>60</timeout>
+                        <includeEnvVars>true</includeEnvVars>
+                        <envVarsExcludePatterns>.*PWD</envVarsExcludePatterns>
+                    </artifactory>
+                    <resolver>
+                        <contextUrl>http://evgenyg.artifactoryonline.com/evgenyg</contextUrl>
+                        <repoKey>repo</repoKey>
+                    </resolver>
+                    <publisher>
+                        <contextUrl>http://evgenyg.artifactoryonline.com/evgenyg</contextUrl>
+                        <username>temp-deployer</username>
+                        <password>{DESede}YiN0PzdSPYltV2J3u3O0fq3y2CbrEWxa</password>
+                        <excludePatterns>*.pom</excludePatterns>
+                        <repoKey>temp</repoKey>
+                        <snapshotRepoKey>temp</snapshotRepoKey>
+                    </publisher>
+                    <buildInfo>
+                        <buildNumber>{DRONE_BUILD_NUMBER|TRAVIS_BUILD_NUMBER|BUILD_NUMBER}</buildNumber>
+                        <buildUrl>{DRONE_BUILD_URL|BUILD_URL}</buildUrl>
+                    </buildInfo>
                   </configuration>
               </execution>
           </executions>
